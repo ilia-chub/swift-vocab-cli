@@ -5,6 +5,20 @@
 //  Created by Ilia Chub on 04.03.2025.
 //
 
-import Foundation
+let markdownFilePath: String
+if CommandLine.arguments.count > 1 {
+    markdownFilePath = CommandLine.arguments[1]
+} else {
+    markdownFilePath = "/Users/frameorigin/Documents/Obsidian Vault/Education/English/monsters_manual_skeletons_1.md"
+}
 
-print("Hello, World!")
+let vocabularyLoader = MarkdownVocabularyLoader(filePath: markdownFilePath)
+let speechService = AVSpeechService()
+let terminalIO = CLITerminalIO()
+
+let app = EnglishLearnerApp(
+    vocabularyLoader: vocabularyLoader,
+    speechService: speechService,
+    terminalIO: terminalIO
+)
+app.run()
